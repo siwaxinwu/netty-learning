@@ -6,7 +6,13 @@
 
   <groupId>com.javashitang</groupId>
   <artifactId>netty-learning</artifactId>
+  <packaging>pom</packaging>
   <version>1.0</version>
+
+  <modules>
+    <module>netty-api</module>
+    <module>nio-api</module>
+  </modules>
 
   <properties>
     <maven.compiler.source>1.8</maven.compiler.source>
@@ -14,12 +20,6 @@
   </properties>
 
   <dependencies>
-
-    <dependency>
-      <groupId>io.netty</groupId>
-      <artifactId>netty-all</artifactId>
-      <version>4.1.28.Final</version>
-    </dependency>
 
     <dependency>
       <groupId>org.slf4j</groupId>
