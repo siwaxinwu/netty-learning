@@ -1,4 +1,4 @@
-package com.javashitang.decoder.lineBasedFrameDecoder;
+package com.javashitang.frame.fault;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
@@ -6,6 +6,7 @@ import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
+import io.netty.util.CharsetUtil;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -16,11 +17,9 @@ public class EchoServerHandler extends ChannelInboundHandlerAdapter {
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
         log.info("server channelRead");
-        String body = (String) msg;
-        System.out.println("server received: " + body);
-        body += System.getProperty("line.separator");
-        ByteBuf resp = Unpooled.copiedBuffer(body.getBytes());
-        ctx.writeAndFlush(resp);
+        ByteBuf in = (ByteBuf) msg;
+        System.out.println("Server received: " + in.toString(CharsetUtil.UTF_8));
+        ctx.write(in);
     }
 
     // 读取完网络数据做的处理

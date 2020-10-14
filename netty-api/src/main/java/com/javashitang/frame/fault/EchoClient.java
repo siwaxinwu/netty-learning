@@ -1,4 +1,4 @@
-package com.javashitang.tcp;
+package com.javashitang.frame.fault;
 
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelFuture;

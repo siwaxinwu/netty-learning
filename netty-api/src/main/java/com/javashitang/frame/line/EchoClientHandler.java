@@ -1,4 +1,4 @@
-package com.javashitang.decoder.lineBasedFrameDecoder;
+package com.javashitang.frame.line;
 
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandlerContext;

@@ -1,4 +1,4 @@
-package com.javashitang.decoder.lineBasedFrameDecoder;
+package com.javashitang.frame.line;
 
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelFuture;

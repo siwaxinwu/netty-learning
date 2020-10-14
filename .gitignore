@@ -9,5 +9,6 @@
 /log
 *.iml
 /netty-api/target
+/netty-api/log
 /nio-api/target
 

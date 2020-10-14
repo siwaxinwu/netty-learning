@@ -31,7 +31,7 @@ public class EchoServer {
                     .childHandler(new ChannelInitializer<SocketChannel>() {
                         @Override
                         protected void initChannel(SocketChannel ch) throws Exception {
-                            ch.pipeline().addLast("msgpack decoder", new MsgpackDecoder());
+                            ch.pipeline().addLast("msgpack frame", new MsgpackDecoder());
                             ch.pipeline().addLast("msgpack encoder", new MsgpackEncoder());
                             ch.pipeline().addLast(serverHandler);
                         }
