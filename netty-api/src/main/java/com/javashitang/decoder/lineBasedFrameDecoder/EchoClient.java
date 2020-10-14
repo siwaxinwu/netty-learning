@@ -1,8 +1,9 @@
-package com.javashitang.decoder.fixedLengthFrameDecoder;
+package com.javashitang.decoder.lineBasedFrameDecoder;
 
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
+import io.netty.channel.ChannelOption;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
@@ -25,11 +26,12 @@ public class EchoClient {
     }
 
     public void start() throws InterruptedException {
-        EventLoopGroup group =new NioEventLoopGroup();
+        EventLoopGroup group = new NioEventLoopGroup();
         try {
             Bootstrap bootstrap = new Bootstrap();
             bootstrap.group(group)
                     .channel(NioSocketChannel.class)
+                    .option(ChannelOption.TCP_NODELAY, true)
                     .remoteAddress(new InetSocketAddress(host, port))
                     .handler(new ChannelInitializer<SocketChannel>() {
                         @Override

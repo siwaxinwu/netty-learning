@@ -1,4 +1,4 @@
-package com.javashitang.decoder.fixedLengthFrameDecoder;
+package com.javashitang.decoder.lineBasedFrameDecoder;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
@@ -30,8 +30,8 @@ public class EchoServer {
             ServerBootstrap bootstrap = new ServerBootstrap();
             bootstrap.group(group)
                     .channel(NioServerSocketChannel.class)
+                    .option(ChannelOption.SO_BACKLOG, 1024)
                     .localAddress(new InetSocketAddress(port))
-                    .childOption(ChannelOption.TCP_NODELAY, true)
                     .childHandler(new ChannelInitializer<SocketChannel>() {
                         @Override
                         protected void initChannel(SocketChannel socketChannel) throws Exception {

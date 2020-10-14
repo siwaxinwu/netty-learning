@@ -1,13 +1,13 @@
-package com.javashitang.decoder.fixedLengthFrameDecoder;
+package com.javashitang.codec.msgPack.case1;
 
-import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
-import io.netty.util.CharsetUtil;
 import lombok.extern.slf4j.Slf4j;
+
+import java.util.List;
 
 @Slf4j
 @ChannelHandler.Sharable
@@ -17,9 +17,10 @@ public class EchoServerHandler extends ChannelInboundHandlerAdapter {
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
         log.info("server channelRead");
-        ByteBuf in = (ByteBuf) msg;
-        System.out.println("Server received: " + in.toString(CharsetUtil.UTF_8));
-        ctx.write(in);
+        List<Object> userInfoList = (List<Object>) msg;
+        for (Object userInfo : userInfoList) {
+            System.out.println(userInfo);
+        }
     }
 
     // 读取完网络数据做的处理

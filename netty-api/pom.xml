@@ -11,12 +11,23 @@
 
   <artifactId>netty-api</artifactId>
 
+  <properties>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+  </properties>
+
   <dependencies>
 
     <dependency>
       <groupId>io.netty</groupId>
       <artifactId>netty-all</artifactId>
       <version>4.1.28.Final</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.msgpack</groupId>
+      <artifactId>msgpack</artifactId>
+      <version>0.6.12</version>
     </dependency>
 
   </dependencies>
