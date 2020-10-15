@@ -3,20 +3,23 @@
 
 LineBasedFrameDecoder
 
-依次遍历ByteBuf中的可读字节，判断是否是"\n"或者"\r\n"，如果是就以此为结束标志，从可读索引到结束位置区间的字节组成一行
-
+使用行尾控制字符(\n或者\r\n)作为分隔符来解析数据
 
 StringDecoder
 
 将接收到的对象转成字符串
 
-DelimiterBasedFrameDecoder
+DelimiterBasedFrameDecod
 
-自定义分隔符作为结束标志
+自定义的特殊字符作为消息的分隔符
 
 FixedLengthFrameDecoder
 
 固定长度解码器，按照指定的长度对消息进行解码
+
+LengthFieldBasedFrameDecoder
+
+通知指定长度来标识消息，这样就可以自动的处理粘包和半包消息
 
 ### ByteBuffer的缺点
 
