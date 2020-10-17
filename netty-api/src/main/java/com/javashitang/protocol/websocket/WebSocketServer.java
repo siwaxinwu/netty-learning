@@ -1,19 +1,20 @@
-package com.javashitang.protocol.http;
+package com.javashitang.protocol.websocket;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
-import io.netty.channel.ChannelOption;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
+import io.netty.handler.logging.LogLevel;
+import io.netty.handler.logging.LoggingHandler;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-public class HttpServer {
+public class WebSocketServer {
 
     private final int port;
 
-    public HttpServer(int port) {
+    public WebSocketServer(int port) {
         this.port = port;
     }
 
@@ -26,8 +27,8 @@ public class HttpServer {
             ServerBootstrap bootstrap = new ServerBootstrap();
             bootstrap.group(bossGroup, workerGroup)
                     .channel(NioServerSocketChannel.class)
-                    .childOption(ChannelOption.TCP_NODELAY, true)
-                    .childHandler(new HttpServerInitializer());
+                    .handler(new LoggingHandler(LogLevel.INFO))
+                    .childHandler(new WebSocketServerInitializer());
             ChannelFuture future = bootstrap.bind(port).sync();
             future.channel().closeFuture().sync();
             log.info("server start success");
@@ -38,6 +39,6 @@ public class HttpServer {
     }
 
     public static void main(String[] args) throws InterruptedException {
-        new HttpServer(8080).start();
+        new WebSocketServer(8080).start();
     }
 }
