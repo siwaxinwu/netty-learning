@@ -25,7 +25,7 @@ public class WebSocketServerInitializer extends ChannelInitializer<SocketChannel
         // 这就是为什么当浏览器发送大量数据时，就会发送多个http请求
         pipeline.addLast(new HttpObjectAggregator(8192));
         // WebSocketServerProtocolHandler 是将http协议升级为websocket协议，保持长连接
-        pipeline.addLast(new WebSocketServerProtocolHandler("/"));
-        pipeline.addLast(null);
+        pipeline.addLast(new WebSocketServerProtocolHandler("/websocket"));
+        pipeline.addLast(new TextWebSocketFrameHandler());
     }
 }
