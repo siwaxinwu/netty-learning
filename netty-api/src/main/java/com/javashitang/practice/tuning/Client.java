@@ -20,33 +20,27 @@ public class Client {
         this.port = port;
     }
 
-    public void start() throws InterruptedException {
+    public void start() throws Exception {
         EventLoopGroup group = new NioEventLoopGroup();
-        try {
-            Bootstrap bootstrap = new Bootstrap();
-            bootstrap.group(group)
-                    .channel(NioSocketChannel.class)
-                    .option(ChannelOption.SO_REUSEADDR, true)
-                    .handler(new ChannelInitializer<SocketChannel>() {
-                        @Override
-                        protected void initChannel(SocketChannel ch) throws Exception {
-                            ChannelPipeline pipeline = ch.pipeline();
-                            pipeline.addLast(new FixedLengthFrameDecoder(Long.BYTES));
-                            pipeline.addLast(ClientBusinessHandler.INSTANCE);
-                        }
-                    });
-            for (int i = 0; i < 1000; i++) {
-                bootstrap.connect(host, port).get();
+        Bootstrap bootstrap = new Bootstrap();
+        bootstrap.group(group)
+                .channel(NioSocketChannel.class)
+                .option(ChannelOption.SO_REUSEADDR, true);
+        bootstrap.handler(new ChannelInitializer<SocketChannel>() {
+            @Override
+            protected void initChannel(SocketChannel ch) throws Exception {
+                ChannelPipeline pipeline = ch.pipeline();
+                pipeline.addLast(new FixedLengthFrameDecoder(Long.BYTES));
+                pipeline.addLast(ClientBusinessHandler.INSTANCE);
             }
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            // 关闭线程池并且释放所有的资源
-            group.shutdownGracefully().sync();
+        });
+        // 注意不要关闭
+        for (int i = 0; i < 1000; i++) {
+            bootstrap.connect(host, port).get();
         }
     }
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) throws Exception {
         new Client("127.0.0.1", 8080).start();
     }
 }
