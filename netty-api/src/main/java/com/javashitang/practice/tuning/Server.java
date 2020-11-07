@@ -23,7 +23,7 @@ public class Server {
 
         EventLoopGroup bossGroup = new NioEventLoopGroup();
         EventLoopGroup workerGroup = new NioEventLoopGroup();
-        EventLoopGroup businessGroup = new NioEventLoopGroup();
+        EventLoopGroup businessGroup = new NioEventLoopGroup(1000);
 
         try {
             ServerBootstrap bootstrap = new ServerBootstrap();

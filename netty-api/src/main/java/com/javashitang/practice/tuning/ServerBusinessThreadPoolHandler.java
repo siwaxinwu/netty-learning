@@ -16,9 +16,8 @@ import java.util.concurrent.TimeUnit;
 @ChannelHandler.Sharable
 public class ServerBusinessThreadPoolHandler extends SimpleChannelInboundHandler<ByteBuf> {
 
-    public static final ChannelHandler INSTANCE = new ClientBusinessHandler();
+    public static final ChannelHandler INSTANCE = new ServerBusinessThreadPoolHandler();
     private static ExecutorService threadPool = Executors.newFixedThreadPool(16);
-
 
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, ByteBuf msg) throws Exception {

@@ -24,6 +24,9 @@ public class ServerBusinessHandler extends SimpleChannelInboundHandler<ByteBuf> 
         ctx.channel().writeAndFlush(result);
     }
 
+    /**
+     * 90.0%的响应时间为1ms，以此类推
+     */
     private Object getResult(ByteBuf data) {
 
         // 90.0% == 1ms
