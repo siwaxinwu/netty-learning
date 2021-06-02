@@ -21,7 +21,7 @@ public class EchoClient {
     }
 
     public void start() throws InterruptedException {
-        EventLoopGroup group =new NioEventLoopGroup();
+        EventLoopGroup group = new NioEventLoopGroup();
         try {
             Bootstrap bootstrap = new Bootstrap();
             bootstrap.group(group)
