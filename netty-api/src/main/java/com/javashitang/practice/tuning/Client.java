@@ -1,10 +1,7 @@
 package com.javashitang.practice.tuning;
 
 import io.netty.bootstrap.Bootstrap;
-import io.netty.channel.ChannelInitializer;
-import io.netty.channel.ChannelOption;
-import io.netty.channel.ChannelPipeline;
-import io.netty.channel.EventLoopGroup;
+import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
@@ -36,7 +33,8 @@ public class Client {
         });
         // 注意不要关闭
         for (int i = 0; i < 1000; i++) {
-            bootstrap.connect(host, port).get();
+            ChannelFuture channelFuture = bootstrap.connect(host, port);
+            channelFuture.get();
         }
     }
 

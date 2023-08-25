@@ -36,11 +36,11 @@ public class Server {
                             ChannelPipeline pipeline = ch.pipeline();
                             pipeline.addLast(new FixedLengthFrameDecoder(Long.BYTES));
                             // case 1
-                            // pipeline.addLast(ServerBusinessHandler.INSTANCE);
+                            pipeline.addLast(ServerBusinessHandler.INSTANCE);
                             // case 2
                             // pipeline.addLast(ServerBusinessThreadPoolHandler.INSTANCE);
                             // case 3
-                            pipeline.addLast(businessGroup, ServerBusinessHandler.INSTANCE);
+                            //pipeline.addLast(businessGroup, ServerBusinessHandler.INSTANCE);
                         }
                     });
             ChannelFuture future = bootstrap.bind(port).sync();
